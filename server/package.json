@@ -1,0 +1,19 @@
+{
+  "name": "nodewebcam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blob-util": "^2.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mv": "^2.1.1",
+    "node-webcam": "^0.8.0"
+  }
+}
