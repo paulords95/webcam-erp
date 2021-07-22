@@ -14,6 +14,10 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mv": "^2.1.1",
-    "node-webcam": "^0.8.0"
+    "node-onvif": "^0.1.7",
+    "node-rtsp-stream": "0.0.9",
+    "node-webcam": "^0.8.0",
+    "onvif": "^0.6.4",
+    "onvif-snapshot": "^1.0.3"
   }
 }

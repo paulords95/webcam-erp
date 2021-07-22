@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(237, 228, 247);
+  background-color: rgb(187, 216, 216);
 }
 
 .App {
@@ -16,7 +16,8 @@ body {
 }
 .img-div {
   margin: 0 auto;
-  height: 500px;
+  height: max-content;
+  min-height: 200px;
   justify-content: center;
   align-content: center;
 }
@@ -24,14 +25,16 @@ body {
 .btn {
   width: max-content;
   margin: 0 auto;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .btns {
   display: flex;
   justify-content: center;
-  margin-right: 10px;
+  flex-direction: column;
+  margin-right: 5px;
+  height: max-content;
 }
 
 .btns > div {
-  margin: 10px;
+  margin: 5px;
 }

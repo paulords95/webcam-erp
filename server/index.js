@@ -91,6 +91,8 @@ app.get("/webcam/save/:id", async (req, res) => {
   );
 });
 
+app.use("/onvif", require("./onvif/onvifaccess"));
+
 app.listen(1000, () => {
   console.log(`Servidor rodando na porta 1000`);
 });

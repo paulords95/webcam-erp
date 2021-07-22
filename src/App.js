@@ -1,12 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import Page from "./Page";
+import FaceCam from "./Page";
+import FrontPlate from "./FrontPlate";
 
 function App() {
   return (
     <BrowserRouter>
-      <Route path="/:id?" exact component={Page} />
+      <Route path="/placa-frente/:id?" exact component={FrontPlate} />
+      <Route path="/webcam/:id?" exact component={FaceCam} />
     </BrowserRouter>
   );
 }

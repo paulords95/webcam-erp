@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { useParams } from "react-router-dom";
 
-function Page() {
+function FaceCam() {
   const [imgSrc, setImgSrc] = useState("");
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(id);
     (async () => {
       setLoading(true);
       const data = await fetch(`http://localhost:1000/webcam/${id}`);
@@ -38,14 +37,15 @@ function Page() {
                 setLoading(true);
                 setImgSrc("");
                 const data = await fetch(`http://localhost:1000/webcam/${id}`);
+
                 setImgSrc(await data.json());
+
                 setLoading(false);
               }}
             >
               Tirar nova foto
             </Button>
           </div>
-          <div>{info}</div>
           <div>
             <Button
               className="btn"
@@ -76,4 +76,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default FaceCam;
