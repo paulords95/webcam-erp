@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 function FaceCam() {
   const [imgSrc, setImgSrc] = useState("");
   const [loading, setLoading] = useState(false);
-  const [info, setInfo] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,6 +17,7 @@ function FaceCam() {
       setImgSrc(img.toString());
       setLoading(false);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -55,13 +55,11 @@ function FaceCam() {
                 const data = await fetch(
                   `http://localhost:1000/webcam/save/${id}`
                 );
-                if ((await data.json()) == "Salvo") {
-                  setInfo("Salvo com sucesso");
-
+                if ((await data.json()) === "Salvo") {
                   alert("Salvo com sucesso");
                   window.top.close();
                 } else {
-                  setInfo(
+                  alert(
                     "Erro ao salvar imagem, tire uma nova foto e tente novamente!"
                   );
                 }

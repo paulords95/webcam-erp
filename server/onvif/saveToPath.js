@@ -1,6 +1,7 @@
 const path = require("path");
 const mv = require("mv");
 const fs = require("fs");
+const { rejects } = require("assert");
 
 const currentDate = () => {
   const d = new Date();
@@ -16,42 +17,47 @@ const currentDate = () => {
 };
 
 const savePicToPath = (name) => {
-  const currentPath = path.join(__dirname, "../", `${name}.jpeg`);
-  const destinationPath = path.join(
-    `\\\\note085.quimtia.net.br\\c$\\pics\\${currentDate()}`,
-    `${name}.jpg`
-  );
+  return new Promise((resolve, reject) => {
+    const currentPath = path.join(__dirname, "../", `${name}.jpeg`);
+    const destinationPath = path.join(
+      `\\\\note085.quimtia.net.br\\c$\\pics\\${currentDate()}`,
+      `${name}.jpg`
+    );
 
-  fs.access(
-    `\\\\note085.quimtia.net.br\\c$\\pics\\${currentDate()}`,
-    (error) => {
-      if (!error) {
-        mv(currentPath, destinationPath, function (err) {
-          if (err) {
-            return "Nenhuma foto";
-          } else {
-            return "Salvo";
-          }
-        });
-      } else {
-        fs.mkdir(
-          path.join("\\\\note085.quimtia.net.br\\c$\\pics", `${currentDate()}`),
-          (err) => {
+    fs.access(
+      `\\\\note085.quimtia.net.br\\c$\\pics\\${currentDate()}`,
+      (error) => {
+        if (!error) {
+          mv(currentPath, destinationPath, function (err) {
             if (err) {
-              return console.error(err);
+              resolve("Nenhuma foto");
+            } else {
+              resolve("Salvo");
             }
-            mv(currentPath, destinationPath, function (err) {
+          });
+        } else {
+          fs.mkdir(
+            path.join(
+              "\\\\note085.quimtia.net.br\\c$\\pics",
+              `${currentDate()}`
+            ),
+            (err) => {
               if (err) {
-                console.log(err);
-              } else {
-                return "Salvo";
+                reject(console.error(err));
               }
-            });
-          }
-        );
+              mv(currentPath, destinationPath, function (err) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  resolve("Salvo");
+                }
+              });
+            }
+          );
+        }
       }
-    }
-  );
+    );
+  });
 };
 
 module.exports = savePicToPath;

@@ -60,13 +60,17 @@ router.get("/placa-atras/:id", async (req, res) => {
   });
 });
 
-router.post("/save/:id", (req, res) => {
+router.post("/save/:id", async (req, res) => {
   const { id } = req.params;
   const saveFront = `${id}_FRENTE`;
   const saveBack = `${id}_TRAS`;
-  const saveResponse = savePicToPath(saveFront);
-  const saveResponseBack = savePicToPath(saveBack);
-  res.json(saveResponse);
+  const saveResponse = await savePicToPath(saveFront);
+  const saveResponseBack = await savePicToPath(saveBack);
+  const response = {
+    front: saveResponse,
+    back: saveResponseBack,
+  };
+  res.json(response);
 });
 
 module.exports = router;

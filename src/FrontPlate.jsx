@@ -9,7 +9,6 @@ function FrontPlate() {
   const [imgSrcBack, setImgSrcBack] = useState("");
   const [loadingFront, setLoadingFront] = useState(false);
   const [loadingBack, setLoadingBack] = useState(false);
-  const [info, setInfo] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,6 +28,7 @@ function FrontPlate() {
       setImgSrcBack(img.toString());
       setLoadingBack(false);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -62,7 +62,6 @@ function FrontPlate() {
                   `http://localhost:1000/onvif/placa-frente/${id}`
                 );
                 setImgSrcFront(await data.json());
-
                 setLoadingFront(false);
               }}
             >
@@ -81,7 +80,6 @@ function FrontPlate() {
                   `http://localhost:1000/onvif/placa-atras/${id}`
                 );
                 setImgSrcBack(await data.json());
-
                 setLoadingBack(false);
               }}
             >
@@ -95,16 +93,19 @@ function FrontPlate() {
               color="primary"
               onClick={async () => {
                 const data = await fetch(
-                  `http://localhost:1000/webcam/save/${id}`
+                  `http://localhost:1000/onvif/save/${id}`,
+                  {
+                    method: "POST",
+                  }
                 );
-                if ((await data.json()) == "Salvo") {
-                  setInfo("Salvo com sucesso");
+                const response = await data.json();
 
+                if (response.front === "Salvo" && response.back === "Salvo") {
                   alert("Salvo com sucesso");
                   window.top.close();
                 } else {
-                  setInfo(
-                    "Erro ao salvar imagem, tire uma nova foto e tente novamente!"
+                  alert(
+                    "Erro ao salvar imagem, tire novas fotos e tente novamente!"
                   );
                 }
               }}
